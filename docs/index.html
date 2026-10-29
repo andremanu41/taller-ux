@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App de Notas Accesible</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Mis Notas</h1>
+    </header>
+
+    <main>
+      <!-- Formulario Principal (Optimizado según Ley de Hick) -->
+      <section class="form-section" aria-labelledby="form-title">
+        <h2 id="form-title" class="sr-only">Crear nueva nota</h2>
+        <form id="note-form" novalidate>
+          <div class="form-group">
+            <label for="note-input">Escribe el contenido de tu nota:</label>
+            <textarea
+              id="note-input"
+              placeholder="Ej. Comprar los ingredientes para la cena..."
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <!-- Prevención de errores activa: inicia deshabilitado -->
+          <button type="submit" id="submit-btn" disabled>Agregar Nota</button>
+        </form>
+      </section>
+
+      <!-- Contenedor de Notas (Agrupado según Ley de Miller) -->
+      <section class="notes-section" aria-labelledby="notes-title">
+        <h2 id="notes-title">Tus Notas Recientes</h2>
+        <div id="notes-container" class="notes-grid">
+          <!-- Las notas se inyectan dinámicamente aquí -->
+          <p id="empty-message" class="empty-message">
+            No tienes notas guardadas en este momento.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Sistema de Feedback y Libertad del Usuario (Toasts / Deshacer) -->
+    <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

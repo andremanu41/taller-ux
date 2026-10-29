@@ -1,0 +1,232 @@
+/* ==========================================
+   VARIABLES Y CONFIGURACIÓN (:root)
+   ========================================== */
+:root {
+  /* Paleta con contraste accesible >= 4.5:1 */
+  --bg-main: #f8fafc;
+  --bg-card: #ffffff;
+  --text-dark: #0f172a;
+  --text-muted: #475569;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #dc2626;
+  --danger-hover: #b91c1c;
+  --success: #15803d;
+
+  /* Sistema de espaciado consistente (Múltiplos de 8px) */
+  --space-xs: 0.25rem; /* 4px */
+  --space-sm: 0.5rem; /* 8px */
+  --space-md: 1rem; /* 16px */
+  --space-lg: 2rem; /* 32px */
+
+  --border-radius: 8px;
+}
+
+/* Ocultar elementos visualmente manteniendo accesibilidad para lectores */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ==========================================
+     ESTILOS BASE
+     ========================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  background-color: var(--bg-main);
+  color: var(--text-dark);
+  line-height: 1.5;
+  padding: var(--space-lg) var(--space-md);
+}
+
+header,
+main {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Un solo H1 por página */
+h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+  color: var(--text-dark);
+  border-bottom: 2px solid var(--text-muted);
+  padding-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+}
+
+/* ==========================================
+     ACCESIBILIDAD: FOCO VISIBLE EN TODO EL SITIO
+     ========================================== */
+button:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================
+     FORMULARIO (Ley de Hick y Errores)
+     ========================================== */
+.form-section {
+  background: var(--bg-card);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: var(--space-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+label {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+textarea {
+  width: 100%;
+  padding: var(--space-sm);
+  border: 1px solid var(--text-muted);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  resize: vertical;
+}
+
+/* LEY DE FITTS: Altura mínima de botones de 44px */
+button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 var(--space-md);
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+#submit-btn {
+  background-color: var(--primary);
+  color: #ffffff;
+  width: 100%;
+}
+
+#submit-btn:hover:not(:disabled) {
+  background-color: var(--primary-hover);
+}
+
+/* Estado de prevención de errores visual */
+#submit-btn:disabled {
+  background-color: var(--text-muted);
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+     CONTENEDOR DE NOTAS (Ley de Miller)
+     ========================================== */
+.notes-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.note-card {
+  background: var(--bg-card);
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  border-left: 5px solid var(--primary);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.note-text {
+  word-break: break-word;
+}
+
+.delete-btn {
+  background-color: var(--danger);
+  color: #ffffff;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-hover);
+}
+
+.empty-message {
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  margin-top: var(--space-md);
+}
+
+/* ==========================================
+     SISTEMA DE NOTIFICACIONES (Toasts & Deshacer)
+     ========================================== */
+#toast-container {
+  position: fixed;
+  bottom: var(--space-lg);
+  right: var(--space-lg);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.toast {
+  background-color: #0f172a;
+  color: #ffffff;
+  padding: var(--space-md);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  animation: slideIn 0.3s ease-out;
+}
+
+.undo-btn {
+  background-color: var(--success);
+  color: white;
+  min-height: 36px; /* Ajustado para dentro de alertas pequeñas */
+  font-size: 0.875rem;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
